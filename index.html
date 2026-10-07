@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Misi ASK: Level Up!</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="app" class="app">
+    <div id="toast" class="toast" aria-live="polite"></div>
+
+    <section id="screen-main" class="screen active scene-main">
+      <div class="pixel-sun"></div><div class="cloud cloud-a"></div><div class="cloud cloud-b"></div>
+      <div class="hero-card glass">
+        <div class="eyebrow">ASAS SAINS KOMPUTER • TINGKATAN 2</div>
+        <h1>MISI ASK:<br><span>LEVEL UP!</span></h1>
+        <p class="tagline">Kayuh. Jawab. Unlock. Level Up!</p>
+        <div class="menu-buttons">
+          <button class="btn btn-primary" data-action="start">▶ MULA</button>
+          <button class="btn btn-secondary" data-action="instructions">📖 CARA BERMAIN</button>
+          <button class="btn btn-gold" data-action="leaderboard">🏆 RANKING</button>
+        </div>
+      </div>
+      <div class="mini-leader glass"><h3>🏆 TOP PLAYERS</h3><div id="mainLeaderboard"></div></div>
+      <div class="road"><div class="bike-wrap"><div class="rider">🧑🏻‍💻</div><div class="bike"><div class="wheel w1"></div><div class="wheel w2"></div><div class="frame"></div><div class="handle"></div><div class="pedal p1"></div><div class="pedal p2"></div></div><div class="parcel">📦</div></div></div>
+      <div class="sea"></div><div class="palms">🌴　　　🌴　　　　　　　🌴</div>
+    </section>
+
+    <section id="screen-name" class="screen scene-name">
+      <div class="panel centered-panel glass">
+        <div class="sign">READY FOR THE MISSION?</div>
+        <div class="big-bike">🚴🏻‍♂️</div>
+        <h2>MASUKKAN NAMA ANDA</h2>
+        <input id="playerName" maxlength="18" autocomplete="off" placeholder="Contoh: Ming" />
+        <button class="btn btn-primary" data-action="begin">MULA MISI →</button>
+        <p class="hint">Nama anda digunakan untuk menyimpan skor dalam Leaderboard.</p>
+      </div>
+    </section>
+
+    <section id="screen-instructions" class="screen scene-instructions">
+      <div class="panel instructions-panel glass">
+        <h2>📖 CARA BERMAIN</h2>
+        <div class="instruction-grid">
+          <div class="instruction-item"><b>1 🚲 Kayuh basikal</b><span>Ikuti perjalanan dari mula hingga destinasi.</span></div>
+          <div class="instruction-item"><b>2 🚩 Berhenti di checkpoint</b><span>Setiap checkpoint mempunyai satu soalan ASK.</span></div>
+          <div class="instruction-item"><b>3 ❓ Jawab soalan</b><span>Pilih jawapan yang paling tepat.</span></div>
+          <div class="instruction-item"><b>4 ⭐ Dapatkan XP</b><span>Jawapan betul membuka checkpoint seterusnya.</span></div>
+          <div class="instruction-item"><b>5 📦 Hantar pakej</b><span>Lengkapkan semua 10 checkpoint.</span></div>
+          <div class="instruction-item rules"><b>SISTEM PERMAINAN</b><span>Betul: +100 XP, +10 coins. Salah: cuba lagi selepas melihat jawapan untuk ulang kaji.</span></div>
+        </div>
+        <button class="btn btn-secondary" data-action="back-main">← KEMBALI</button>
+      </div>
+    </section>
+
+    <section id="screen-game" class="screen scene-game">
+      <div class="hud glass">
+        <div>❤️ <b>ENERGY</b> <span id="energy">██████</span></div>
+        <div>⭐ XP: <b id="xp">0</b></div>
+        <div>🪙 COINS: <b id="coins">0</b></div>
+        <div>🚩 CHECKPOINT <b id="cpCount">0 / 10</b></div>
+        <button id="musicToggle" class="icon-btn" title="Music">🔊</button>
+      </div>
+      <div class="coast-world">
+        <div class="sun"></div><div class="cloud cloud-c"></div><div class="cloud cloud-d"></div>
+        <div class="island">🏝️</div><div class="boat">⛵</div><div class="palm-row">🌴　　 🌴　　　　🌴　　　　　 🌴</div>
+        <div class="road game-road"><div class="lane"></div><div class="bike-character"><div class="rider-pixel">🧑🏻‍💻</div><div class="bike"><div class="wheel w1"></div><div class="wheel w2"></div><div class="frame"></div><div class="handle"></div><div class="pedal p1"></div><div class="pedal p2"></div></div><div class="parcel">📦</div></div></div>
+        <div class="checkpoint-track" id="checkpointTrack"></div>
+      </div>
+      <div class="question-card glass hidden" id="questionCard">
+        <div class="q-top"><span id="qNumber">CHECKPOINT 1</span><span id="qTopic">SISTEM NOMBOR</span></div>
+        <h3 id="questionText"></h3>
+        <div id="options" class="options"></div>
+        <div id="feedback" class="feedback hidden"></div>
+      </div>
+      <div class="game-footer"><span id="statusText">Sampai ke checkpoint untuk menjawab soalan.</span><button id="nextBtn" class="btn btn-primary hidden">TERUSKAN →</button></div>
+    </section>
+
+    <section id="screen-leaderboard" class="screen scene-leaderboard">
+      <div class="panel leaderboard-panel glass">
+        <h2>🏆 MISSION LEADERBOARD</h2>
+        <div class="leaderboard-table"><div class="lb-head"><span>RANK</span><span>PLAYER</span><span>XP</span><span>TIME</span></div><div id="leaderboardRows"></div></div>
+        <p class="storage-note">Skor disimpan pada browser ini menggunakan localStorage.</p>
+        <div class="row-buttons"><button class="btn btn-secondary" data-action="back-main">← MENU</button><button class="btn btn-gold" data-action="clear-leaderboard">RESET DATA</button></div>
+      </div>
+    </section>
+
+    <section id="screen-ending" class="screen scene-ending">
+      <div class="ending-card glass">
+        <div class="celebrate">🎉</div><h1>DELIVERY COMPLETE!</h1>
+        <div class="ending-grid">
+          <div>📦 DELIVERY<strong>COMPLETE</strong></div><div>🚩 CHECKPOINT<strong id="endCp">10 / 10</strong></div><div>⭐ XP<strong id="endXp">1000</strong></div><div>🪙 COINS<strong id="endCoins">100</strong></div><div>✅ CORRECT<strong id="endCorrect">10 / 10</strong></div><div>⏱️ TIME<strong id="endTime">00:00</strong></div>
+        </div>
+        <div class="rank-badge">🏆 ASK MASTER!</div>
+        <div class="row-buttons"><button class="btn btn-gold" data-action="leaderboard">🏆 LEADERBOARD</button><button class="btn btn-primary" data-action="replay">🔄 REPLAY</button></div>
+      </div>
+    </section>
+  </div>
+  <div id="modal" class="modal hidden"><div class="modal-box glass"><div id="modalIcon" class="modal-icon">✨</div><h2 id="modalTitle"></h2><p id="modalMessage"></p><div id="modalAnswer" class="correct-answer hidden"></div><button id="modalBtn" class="btn btn-primary">OK</button></div></div>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="script.js"></script>
+</body>
+</html>
