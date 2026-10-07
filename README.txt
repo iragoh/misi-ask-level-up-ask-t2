@@ -1,13 +1,5 @@
 MISI ASK: LEVEL UP!
 
-Vercel deployment:
-1. Upload all files in this folder to a GitHub repository.
-2. Import the repository into Vercel.
-3. Framework Preset: Other / None.
-4. Build Command: leave empty.
-5. Output Directory: leave empty.
-6. Deploy.
-
 Files:
 - index.html
 - style.css
