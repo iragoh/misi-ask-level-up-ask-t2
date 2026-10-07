@@ -80,7 +80,7 @@
       <div class="panel leaderboard-panel glass">
         <h2>🏆 MISSION LEADERBOARD</h2>
         <div class="leaderboard-table"><div class="lb-head"><span>RANK</span><span>PLAYER</span><span>XP</span><span>TIME</span></div><div id="leaderboardRows"></div></div>
-        <p class="storage-note">Skor disimpan pada browser ini menggunakan localStorage.</p>
+        <p id="dbStatus" class="storage-note">🌐 Menyemak sambungan leaderboard...</p>
         <div class="row-buttons"><button class="btn btn-secondary" data-action="back-main">← MENU</button><button class="btn btn-gold" data-action="clear-leaderboard">RESET DATA</button></div>
       </div>
     </section>
@@ -98,6 +98,7 @@
   </div>
   <div id="modal" class="modal hidden"><div class="modal-box glass"><div id="modalIcon" class="modal-icon">✨</div><h2 id="modalTitle"></h2><p id="modalMessage"></p><div id="modalAnswer" class="correct-answer hidden"></div><button id="modalBtn" class="btn btn-primary">OK</button></div></div>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="script.js"></script>
+  <script src="supabase-config.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
