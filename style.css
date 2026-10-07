@@ -10,3 +10,70 @@
 .modal{position:fixed;inset:0;background:rgba(7,24,36,.68);display:grid;place-items:center;z-index:100}.modal-box{width:min(470px,90vw);padding:30px;text-align:center;animation:pop .35s ease}.modal-icon{font-size:70px}.correct-answer{margin:15px 0;padding:12px;background:#fff0a7;border:3px dashed #17334d;border-radius:10px;font-weight:900}
 @keyframes spin{to{transform:rotate(360deg)}}@keyframes pedal{to{transform:rotate(360deg)}}@keyframes rideBob{to{transform:translateY(-5px)}}@keyframes parcel{to{transform:translateY(-3px)}}@keyframes float{50%{transform:translateY(-8px)}}@keyframes pulse{50%{transform:scale(1.25)}}@keyframes pop{0%{transform:scale(.5);opacity:0}70%{transform:scale(1.08)}100%{transform:scale(1);opacity:1}}@keyframes bounce{50%{transform:translateY(-10px)}}
 @media(max-width:760px){.mini-leader{display:none}.hero-card{padding:22px}.instruction-grid,.options,.ending-grid{grid-template-columns:1fr}.hud{font-size:11px}.question-card{top:50%;max-height:72vh;overflow:auto}.game-footer{font-size:11px}.lb-head,.lb-row{grid-template-columns:45px 1fr 65px 65px;font-size:12px}.scene-main:after,.scene-name:after,.scene-instructions:after,.scene-game:after,.scene-leaderboard:after,.scene-ending:after{font-size:28px}}
+
+/* =========================================================
+   STORYBOARD BACKGROUNDS
+   These backgrounds are cropped directly from the generated
+   Misi ASK: Level Up! storyboard supplied for this project.
+   ========================================================= */
+.scene-main,
+.scene-name,
+.scene-instructions,
+.scene-game,
+.scene-leaderboard,
+.scene-ending{
+  background-color:#102c43;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+  isolation:isolate;
+}
+.scene-main{background-image:url('assets/storyboard-main.png')}
+.scene-name{background-image:url('assets/storyboard-name.png')}
+.scene-instructions{background-image:url('assets/storyboard-instructions.png')}
+.scene-game{background-image:url('assets/storyboard-game.png')}
+.scene-leaderboard{background-image:url('assets/storyboard-leaderboard.png')}
+.scene-ending{background-image:url('assets/storyboard-ending.png')}
+
+/* Keep the storyboard art as the visual background while the real UI
+   remains interactive above it. */
+.scene-main::before,
+.scene-name::before,
+.scene-instructions::before,
+.scene-game::before,
+.scene-leaderboard::before,
+.scene-ending::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:0;
+  pointer-events:none;
+  background:linear-gradient(rgba(8,31,48,.10),rgba(8,31,48,.16));
+}
+.scene-main::after,
+.scene-name::after,
+.scene-instructions::after,
+.scene-game::after,
+.scene-leaderboard::after,
+.scene-ending::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:0;
+  pointer-events:none;
+  background:linear-gradient(180deg,transparent 45%,rgba(5,24,38,.08));
+}
+
+/* Slightly translucent UI so the storyboard scenery remains visible. */
+.hero-card,.mini-leader,.centered-panel,.instructions-panel,
+.hud,.question-card,.leaderboard-panel,.ending-card{
+  backdrop-filter:blur(1.5px);
+  background:rgba(255,248,220,.91);
+}
+
+/* On narrow screens, keep the storyboard image visible rather than
+   allowing the page background to disappear behind the panels. */
+@media(max-width:760px){
+  .scene-main,.scene-name,.scene-instructions,.scene-game,
+  .scene-leaderboard,.scene-ending{background-position:center center}
+}
